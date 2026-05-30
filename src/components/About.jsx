@@ -9,7 +9,7 @@ export default function About() {
           dedicated to providing exceptional custom artwork in a welcoming,
           spotless, and professional environment. Whether you are looking for a
           large scale realistic piece or a flawless cover up, our resident
-          artists Viktor and Natasha will ensure your vision is brought to life
+          artist Viktor will ensure your vision is brought to life
           with precision and care.
         </p>
       </div>
