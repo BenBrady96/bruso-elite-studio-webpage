@@ -1,6 +1,7 @@
 import { Facebook, Instagram } from 'lucide-react'
 import TikTokIcon from './icons/TikTokIcon'
-import { SOCIAL_LINKS } from '../constants'
+import ServiceChooser from './ServiceChooser'
+import { CONTACTS } from '../constants'
 
 export default function SocialLinks({ size = 20, className = '', linkClassName = '' }) {
   const baseLink =
@@ -8,26 +9,30 @@ export default function SocialLinks({ size = 20, className = '', linkClassName =
 
   return (
     <div className={`flex items-center gap-5 ${className}`}>
+      <ServiceChooser
+        ariaLabel="Choose a Facebook page"
+        menuLabel="Facebook"
+        align="right"
+        triggerClassName={`${baseLink} ${linkClassName}`}
+        trigger={<Facebook size={size} />}
+        options={[
+          { label: 'Tattoo', href: CONTACTS.tattoo.facebook },
+          { label: 'Aesthetics', href: CONTACTS.aesthetics.facebook },
+        ]}
+      />
+      <ServiceChooser
+        ariaLabel="Choose an Instagram page"
+        menuLabel="Instagram"
+        align="right"
+        triggerClassName={`${baseLink} ${linkClassName}`}
+        trigger={<Instagram size={size} />}
+        options={[
+          { label: 'Tattoo', href: CONTACTS.tattoo.instagram },
+          { label: 'Aesthetics', href: CONTACTS.aesthetics.instagram },
+        ]}
+      />
       <a
-        href={SOCIAL_LINKS.facebook}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Bruso Elite Studio on Facebook"
-        className={`${baseLink} ${linkClassName}`}
-      >
-        <Facebook size={size} />
-      </a>
-      <a
-        href={SOCIAL_LINKS.instagram}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Bruso Elite Studio on Instagram"
-        className={`${baseLink} ${linkClassName}`}
-      >
-        <Instagram size={size} />
-      </a>
-      <a
-        href={SOCIAL_LINKS.tiktok}
+        href={CONTACTS.tattoo.tiktok}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Bruso Elite Studio on TikTok"

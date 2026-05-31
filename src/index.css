@@ -36,6 +36,10 @@
   .section-heading {
     @apply text-3xl font-extrabold uppercase tracking-tight sm:text-4xl md:text-5xl;
   }
+
+  .sub-heading {
+    @apply text-2xl font-bold uppercase tracking-tight sm:text-3xl;
+  }
 }
 
 @keyframes spin {
@@ -44,66 +48,38 @@
   }
 }
 
-/* Animated fire effect for the studio name */
 .fire-text {
   background-image: linear-gradient(
     0deg,
     #5a0d00 0%,
-    #8f1b00 22%,
-    #c23600 45%,
-    #e25100 68%,
-    #ff6a00 86%,
+    #8f1b00 20%,
+    #c23600 42%,
+    #e25100 64%,
+    #ff6a00 84%,
     #ff8412 100%
   );
-  background-size: 100% 260%;
+  background-size: 100% 200%;
   background-position: 50% 0%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  animation:
-    fireShift 3.8s linear infinite,
-    fireFlicker 1.8s steps(1, end) infinite;
+  filter: drop-shadow(0 0 8px rgba(226, 81, 0, 0.45));
+  animation: fireGlow 14s ease-in-out infinite;
 }
 
-@keyframes fireShift {
+@keyframes fireGlow {
   0% {
     background-position: 50% 0%;
-    background-size: 100% 260%;
+    filter: drop-shadow(0 0 6px rgba(200, 60, 0, 0.4));
   }
   50% {
-    background-size: 100% 300%;
-  }
-  100% {
     background-position: 50% 100%;
-    background-size: 100% 260%;
-  }
-}
-
-@keyframes fireFlicker {
-  0% {
-    filter: drop-shadow(0 0 4px rgba(200, 55, 0, 0.5)) brightness(0.92);
-  }
-  15% {
-    filter: drop-shadow(0 0 12px rgba(255, 95, 0, 0.85)) brightness(1.18);
-  }
-  30% {
-    filter: drop-shadow(0 0 6px rgba(180, 45, 0, 0.55)) brightness(0.88);
-  }
-  45% {
-    filter: drop-shadow(0 0 14px rgba(255, 110, 0, 0.9)) brightness(1.22);
-  }
-  60% {
-    filter: drop-shadow(0 0 7px rgba(200, 60, 0, 0.6)) brightness(0.95);
-  }
-  75% {
-    filter: drop-shadow(0 0 13px rgba(255, 130, 20, 0.85)) brightness(1.15);
-  }
-  90% {
-    filter: drop-shadow(0 0 5px rgba(190, 50, 0, 0.55)) brightness(0.9);
+    filter: drop-shadow(0 0 16px rgba(255, 120, 20, 0.6));
   }
   100% {
-    filter: drop-shadow(0 0 10px rgba(255, 100, 0, 0.8)) brightness(1.1);
+    background-position: 50% 0%;
+    filter: drop-shadow(0 0 6px rgba(200, 60, 0, 0.4));
   }
 }
 
@@ -114,7 +90,6 @@
   }
 }
 
-/* Swiper coverflow tuning for the dark theme */
 .swiper-pagination-bullet {
   background-color: #ffffff !important;
   opacity: 0.35;

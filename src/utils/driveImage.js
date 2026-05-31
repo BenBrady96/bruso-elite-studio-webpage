@@ -1,7 +1,3 @@
-// Google Drive "uc?export=view" links are frequently blocked from rendering in
-// <img> tags. These helpers build the more reliable rendering URLs from a file
-// id, and provide an ordered list of candidates to fall back through.
-
 export function getDriveFileId(image) {
   if (!image) return null
   if (image.id) return image.id

@@ -1,24 +1,25 @@
 # Bruso Elite Studio
 
-The official single-page website for Bruso Elite Studio, a premium tattoo studio in King's Lynn. The site showcases the studio's work, pricing, client reviews, and location, and makes it easy for visitors to book straight through WhatsApp.
+The official single-page website for Bruso Elite Studio, a premium tattoo and aesthetics studio in King's Lynn. The site showcases the studio's work, pricing, client reviews, and location, and makes it easy for visitors to book either the tattoo or aesthetics side straight through WhatsApp.
 
 Live site: https://benbrady96.github.io/bruso-elite-studio-webpage/
 
 ## Overview
 
-The website is a fast, mobile-first single page built around an absolute dark-mode aesthetic: a solid black background, white text, sharp edges, and crisp borders to suit the tattoo studio feel. It scales smoothly from phones up to large desktop screens.
+The website is a fast, mobile-first single page built around an absolute dark-mode aesthetic: a solid black background, white text, sharp edges, and crisp borders to suit the studio feel. It scales smoothly from phones up to large desktop screens.
 
-Pricing and gallery content are loaded dynamically from a Google Apps Script endpoint, so the studio can update them without touching the code.
+The hero image, galleries and pricing are all loaded dynamically from a Google Apps Script endpoint, so the studio can update them without touching the code.
 
 ## Sections
 
-- Hero with a studio image and a prominent "Book Now" call to action
-- About the studio and its resident artists, Viktor and Natasha
-- Gallery, an interactive 3D coverflow carousel of recent work
-- Pricing, a responsive list driven by live data
+- Hero with the studio's main image (from live data) and "Book Tattoo" and "Book Aesthetics" calls to action
+- About the studio, its resident tattoo artist Viktor and its resident aesthetics specialist Natasha
+- Tattoo, with its own gallery and grouped pricing list
+- Aesthetics, with its own gallery and grouped pricing list
+- Galleries are interactive 3D coverflow carousels of recent work
 - Reviews from real clients
 - Location with an embedded map and opening hours
-- A persistent floating WhatsApp button for instant enquiries
+- A persistent floating WhatsApp button that lets visitors choose the Tattoo or Aesthetics line
 
 ## Tech Stack
 
@@ -48,26 +49,36 @@ npm run preview
 
 The optimised output is generated in the `dist` folder.
 
-## Dynamic Content (Pricing and Gallery)
+## Dynamic Content (Hero Image, Galleries and Pricing)
 
-Pricing and gallery images are fetched at runtime from a Google Apps Script web app. The endpoint is configured in `src/constants.js` (`API_URL`) and must return JSON in this shape:
+The hero image, galleries and pricing are fetched at runtime from a Google Apps Script web app. The endpoint is configured in `src/constants.js` (`API_URL`) and must return JSON in this shape:
 
 ```json
 {
   "success": true,
   "data": {
-    "prices": [{ "service": "Small Tattoo", "price": "From 60" }],
-    "images": [{ "id": "1", "name": "Sleeve", "url": "https://..." }]
+    "pricing": {
+      "tattoo": [{ "heading": "TATTOO", "subheading": "", "item": "1 hour", "price": "90" }],
+      "aesthetics": [{ "heading": "BODY PIERCING", "subheading": "14+", "item": "Navel", "price": "30" }]
+    },
+    "images": {
+      "main": [{ "id": "1", "name": "Studio", "url": "https://..." }],
+      "tattooGallery": [{ "id": "2", "name": "Sleeve", "url": "https://..." }],
+      "aestheticsGallery": [{ "id": "3", "name": "Facial", "url": "https://..." }]
+    }
   }
 }
 ```
+
+The `images` object can sit either under `data` (as above) or at the top level next to `data`; the app reads from whichever is present. Pricing items are grouped on the page by `heading`, and then by `subheading` within each heading. A blank `subheading` simply renders the items directly under the heading. The first entry in `images.main` is used as the hero background.
 
 Important: the Apps Script deployment must be set to "Who has access: Anyone". If access is restricted, the endpoint redirects to a Google sign-in page and the gallery and pricing sections will show a fallback message instead of live content.
 
 ## Customisation
 
-- Studio name, contact details, social links, opening hours, and the API URL live in `src/constants.js`.
-- The hero image is `src/Images/viktor.jpg`; replace this file to change the hero background.
+- Studio name, the API URL, opening hours, and the address live in `src/constants.js`.
+- Per service contact details (WhatsApp, phone, email and social links for Tattoo and Aesthetics) live in the `CONTACTS` object in `src/constants.js`. These power the hero buttons, the Footer, the Facebook chooser and the floating WhatsApp chooser.
+- The hero background comes from `images.main` in the live data; update it from the Apps Script source rather than in the code.
 - Client reviews are defined in `src/data/reviews.js`.
 
 ## Deployment

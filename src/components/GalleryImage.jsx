@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { getDriveImageCandidates } from '../utils/driveImage'
 
-export default function GalleryImage({ image, index }) {
+export default function GalleryImage({ image, index, altLabel = 'Studio artwork' }) {
   const candidates = getDriveImageCandidates(image)
   const [candidateIndex, setCandidateIndex] = useState(0)
 
   const src = candidates[candidateIndex]
-  const alt = `Studio artwork ${index + 1}`
+  const alt = `${altLabel} ${index + 1}`
 
   if (!src) {
     return (

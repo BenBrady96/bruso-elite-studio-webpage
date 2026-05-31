@@ -26,8 +26,6 @@ async function requestStudioData(timeoutMs) {
     try {
       json = JSON.parse(text)
     } catch {
-      // A common cause here is the Apps Script deployment not being public,
-      // which makes Google return a sign in HTML page instead of JSON.
       if (/<!doctype html|accounts\.google\.com/i.test(text)) {
         throw new Error(
           'The data endpoint returned a Google sign in page. Set the Apps Script deployment access to "Anyone".'
@@ -40,18 +38,34 @@ async function requestStudioData(timeoutMs) {
       throw new Error('The data endpoint returned an unexpected response.')
     }
 
+    const pricing = json.data.pricing || {}
+    const images = json.images || json.data.images || {}
+    const mainImages = Array.isArray(images.main) ? images.main : []
+
     return {
-      prices: Array.isArray(json.data.prices) ? json.data.prices : [],
-      images: Array.isArray(json.data.images) ? json.data.images : [],
+      mainImage: mainImages[0] || null,
+      tattooGallery: Array.isArray(images.tattooGallery) ? images.tattooGallery : [],
+      aestheticsGallery: Array.isArray(images.aestheticsGallery)
+        ? images.aestheticsGallery
+        : [],
+      tattooPricing: Array.isArray(pricing.tattoo) ? pricing.tattoo : [],
+      aestheticsPricing: Array.isArray(pricing.aesthetics) ? pricing.aesthetics : [],
     }
   } finally {
     clearTimeout(timer)
   }
 }
 
+const EMPTY_DATA = {
+  mainImage: null,
+  tattooGallery: [],
+  aestheticsGallery: [],
+  tattooPricing: [],
+  aestheticsPricing: [],
+}
+
 export default function useStudioData() {
-  const [prices, setPrices] = useState([])
-  const [images, setImages] = useState([])
+  const [data, setData] = useState(EMPTY_DATA)
   const [loading, setLoading] = useState(true)
   const [retrying, setRetrying] = useState(false)
   const [attempt, setAttempt] = useState(0)
@@ -79,11 +93,10 @@ export default function useStudioData() {
         if (i > 1) setRetrying(true)
 
         try {
-          const data = await requestStudioData(REQUEST_TIMEOUT_MS)
+          const result = await requestStudioData(REQUEST_TIMEOUT_MS)
           if (cancelledRef.current) return
 
-          setPrices(data.prices)
-          setImages(data.images)
+          setData(result)
           setError(null)
           setLoading(false)
           setRetrying(false)
@@ -113,5 +126,13 @@ export default function useStudioData() {
     }
   }, [reloadKey])
 
-  return { prices, images, loading, retrying, attempt, error, retry, maxAttempts: MAX_ATTEMPTS }
+  return {
+    ...data,
+    loading,
+    retrying,
+    attempt,
+    error,
+    retry,
+    maxAttempts: MAX_ATTEMPTS,
+  }
 }

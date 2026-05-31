@@ -1,28 +1,37 @@
 export const STUDIO_NAME = 'Bruso Elite Studio'
 
-// Stable Apps Script deployment URL. The deployment must be set to "Anyone"
-// access, otherwise it redirects to a Google sign in page instead of the JSON.
 export const API_URL =
   'https://script.google.com/macros/s/AKfycbxoX2aVmUPg-B2gL9W2E6wFXLW4F9G_9bCulZtw54JoH8dpUIZmOmqlR3zpZ-Cgj4EarA/exec'
 
-export const WHATSAPP_URL =
-  'https://wa.me/447506709380?text=Hi%20Bruso%20Elite%20Studio,%20I%20would%20like%20to%20inquire%20about%20a%20booking.'
-
-export const PHONE_DISPLAY = '+44 7506 709380'
+export const CONTACTS = {
+  tattoo: {
+    label: 'Tattoo',
+    phoneDisplay: '+44 7506 709380',
+    whatsappUrl:
+      'https://wa.me/447506709380?text=Hi%20Bruso%20Elite%20Studio,%20I%20would%20like%20to%20enquire%20about%20a%20tattoo%20booking.',
+    email: 'brusoelitestudio@gmail.com',
+    facebook: 'https://www.facebook.com/brusoelitestudio/',
+    instagram: 'https://www.instagram.com/bruso_elitestudio/',
+    tiktok: 'https://www.tiktok.com/@brusoelitestudio',
+  },
+  aesthetics: {
+    label: 'Aesthetics',
+    phoneDisplay: '+44 7788 926097',
+    whatsappUrl:
+      'https://wa.me/447788926097?text=Hi%20Bruso%20Elite%20Aesthetics,%20I%20would%20like%20to%20enquire%20about%20an%20aesthetics%20treatment.',
+    email: 'natasab@inbox.ru',
+    facebook: 'https://www.facebook.com/brusoeliteaesthetic/',
+    instagram: 'https://www.instagram.com/bruso_elite_aesthetics',
+  },
+}
 
 export const ADDRESS = "73 Lynn Rd, King's Lynn PE30 4PR"
 export const ADDRESS_FULL = "Bruso Elite Studio, 73 Lynn Rd, King's Lynn PE30 4PR"
 
-export const SOCIAL_LINKS = {
-  facebook: 'https://www.facebook.com/brusoelitestudio/',
-  instagram: 'https://www.instagram.com/bruso_elitestudio/',
-  tiktok: 'https://www.tiktok.com/@brusoelitestudio',
-}
-
 export const NAV_LINKS = [
   { label: 'About', href: '#about' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Pricing', href: '#pricing' },
+  { label: 'Tattoo', href: '#tattoo' },
+  { label: 'Aesthetics', href: '#aesthetics' },
   { label: 'Reviews', href: '#reviews' },
   { label: 'Location', href: '#location' },
 ]

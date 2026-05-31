@@ -1,41 +1,64 @@
+import { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
-import { WHATSAPP_URL, STUDIO_NAME } from '../constants'
-import heroImage from '../Images/viktor.jpg'
+import { CONTACTS, STUDIO_NAME } from '../constants'
+import { getDriveImageCandidates } from '../utils/driveImage'
 
-export default function Hero() {
+export default function Hero({ image }) {
+  const candidates = getDriveImageCandidates(image, 1600)
+  const [candidateIndex, setCandidateIndex] = useState(0)
+  const src = candidates[candidateIndex]
+
   return (
     <section
       id="top"
       className="relative flex min-h-screen items-center justify-center overflow-hidden"
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroImage})` }}
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 bg-black" aria-hidden="true">
+        {src && (
+          <img
+            src={src}
+            alt=""
+            aria-hidden="true"
+            referrerPolicy="no-referrer"
+            onError={() => setCandidateIndex((current) => current + 1)}
+            className="h-full w-full object-cover"
+          />
+        )}
+      </div>
       <div className="absolute inset-0 bg-black/70" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-5 pt-24 text-center sm:px-8">
         <p className="mb-4 text-xs uppercase tracking-[0.4em] text-white sm:text-sm">
-          Premium Tattoo Studio
+          Premium Tattoo &amp; Aesthetics Studio
         </p>
         <h1 className="fire-text text-4xl font-extrabold uppercase leading-tight tracking-tight sm:text-6xl md:text-7xl">
           {STUDIO_NAME}
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-base text-white/80 sm:text-lg">
-          Exceptional custom artwork and flawless cover ups in a spotless,
-          welcoming studio.
+          Exceptional custom tattoo artwork and expert aesthetic treatments in a
+          spotless, welcoming studio.
         </p>
 
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-10 inline-flex items-center gap-3 border border-white bg-white px-8 py-4 text-sm font-semibold uppercase tracking-widest text-black transition-colors hover:bg-black hover:text-white"
-        >
-          Book Now
-          <ArrowRight size={18} />
-        </a>
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href={CONTACTS.tattoo.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full items-center justify-center gap-3 border border-white bg-white px-8 py-4 text-sm font-semibold uppercase tracking-widest text-black transition-colors hover:bg-black hover:text-white sm:w-auto"
+          >
+            Book Tattoo
+            <ArrowRight size={18} />
+          </a>
+          <a
+            href={CONTACTS.aesthetics.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full items-center justify-center gap-3 border border-white bg-transparent px-8 py-4 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black sm:w-auto"
+          >
+            Book Aesthetics
+            <ArrowRight size={18} />
+          </a>
+        </div>
       </div>
     </section>
   )
