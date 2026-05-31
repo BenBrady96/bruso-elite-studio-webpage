@@ -84,7 +84,7 @@ export default function Footer() {
               Stay up to date with our latest work across social media.
             </p>
             <div className="mt-4">
-              <SocialLinks size={22} />
+              <SocialLinks size={22} chooserAlign="left" chooserDirection="up" />
             </div>
           </div>
         </div>

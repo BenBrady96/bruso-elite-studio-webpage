@@ -3,7 +3,13 @@ import TikTokIcon from './icons/TikTokIcon'
 import ServiceChooser from './ServiceChooser'
 import { CONTACTS } from '../constants'
 
-export default function SocialLinks({ size = 20, className = '', linkClassName = '' }) {
+export default function SocialLinks({
+  size = 20,
+  className = '',
+  linkClassName = '',
+  chooserAlign = 'right',
+  chooserDirection = 'down',
+}) {
   const baseLink =
     'inline-flex items-center justify-center text-white transition-opacity hover:opacity-60'
 
@@ -12,7 +18,8 @@ export default function SocialLinks({ size = 20, className = '', linkClassName =
       <ServiceChooser
         ariaLabel="Choose a Facebook page"
         menuLabel="Facebook"
-        align="right"
+        align={chooserAlign}
+        direction={chooserDirection}
         triggerClassName={`${baseLink} ${linkClassName}`}
         trigger={<Facebook size={size} />}
         options={[
@@ -23,7 +30,8 @@ export default function SocialLinks({ size = 20, className = '', linkClassName =
       <ServiceChooser
         ariaLabel="Choose an Instagram page"
         menuLabel="Instagram"
-        align="right"
+        align={chooserAlign}
+        direction={chooserDirection}
         triggerClassName={`${baseLink} ${linkClassName}`}
         trigger={<Instagram size={size} />}
         options={[
