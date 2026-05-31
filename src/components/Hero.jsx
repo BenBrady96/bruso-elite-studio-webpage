@@ -3,10 +3,27 @@ import { ArrowRight } from 'lucide-react'
 import { CONTACTS, STUDIO_NAME } from '../constants'
 import { getDriveImageCandidates } from '../utils/driveImage'
 
-export default function Hero({ image }) {
+export default function Hero({ image, onImageSettled }) {
   const candidates = getDriveImageCandidates(image, 1600)
   const [candidateIndex, setCandidateIndex] = useState(0)
+  const [loaded, setLoaded] = useState(false)
   const src = candidates[candidateIndex]
+
+  const handleLoad = () => {
+    setLoaded(true)
+    onImageSettled?.()
+  }
+
+  const handleError = () => {
+    setLoaded(false)
+    setCandidateIndex((current) => {
+      const next = current + 1
+      if (next >= candidates.length) {
+        onImageSettled?.()
+      }
+      return next
+    })
+  }
 
   return (
     <section
@@ -20,8 +37,11 @@ export default function Hero({ image }) {
             alt=""
             aria-hidden="true"
             referrerPolicy="no-referrer"
-            onError={() => setCandidateIndex((current) => current + 1)}
-            className="h-full w-full object-cover"
+            onLoad={handleLoad}
+            onError={handleError}
+            className={`h-full w-full object-cover transition-opacity duration-700 ${
+              loaded ? 'opacity-100' : 'opacity-0'
+            }`}
           />
         )}
       </div>

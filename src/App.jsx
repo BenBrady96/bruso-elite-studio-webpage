@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -16,6 +16,7 @@ import Loader from './components/Loader'
 export default function App() {
   const {
     mainImage,
+    mainImageLoading,
     tattooGallery,
     aestheticsGallery,
     tattooPricing,
@@ -27,6 +28,9 @@ export default function App() {
     retry,
     maxAttempts,
   } = useStudioData()
+
+  const [heroImageSettled, setHeroImageSettled] = useState(false)
+  const heroReady = !mainImageLoading && (!mainImage || heroImageSettled)
 
   useEffect(() => {
     AOS.init({
@@ -48,17 +52,14 @@ export default function App() {
     aestheticsPricing,
   ])
 
-  if (loading) {
-    return <Loader />
-  }
-
-  const dataStatus = { retrying, attempt, error, onRetry: retry, maxAttempts }
+  const dataStatus = { loading, retrying, attempt, error, onRetry: retry, maxAttempts }
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {!heroReady && <Loader />}
       <Header />
       <main>
-        <Hero image={mainImage} />
+        <Hero image={mainImage} onImageSettled={() => setHeroImageSettled(true)} />
         <About />
         <ServiceArea
           id="tattoo"

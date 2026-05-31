@@ -6,12 +6,14 @@ const REQUEST_TIMEOUT_MS = 12000
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-async function requestStudioData(timeoutMs) {
+const backoff = (attempt) => Math.min(2000 * 2 ** (attempt - 1), 15000)
+
+async function fetchJson(url, timeoutMs) {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
 
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(url, {
       signal: controller.signal,
       redirect: 'follow',
     })
@@ -38,26 +40,17 @@ async function requestStudioData(timeoutMs) {
       throw new Error('The data endpoint returned an unexpected response.')
     }
 
-    const pricing = json.data.pricing || {}
-    const images = json.images || json.data.images || {}
-    const mainImages = Array.isArray(images.main) ? images.main : []
-
-    return {
-      mainImage: mainImages[0] || null,
-      tattooGallery: Array.isArray(images.tattooGallery) ? images.tattooGallery : [],
-      aestheticsGallery: Array.isArray(images.aestheticsGallery)
-        ? images.aestheticsGallery
-        : [],
-      tattooPricing: Array.isArray(pricing.tattoo) ? pricing.tattoo : [],
-      aestheticsPricing: Array.isArray(pricing.aesthetics) ? pricing.aesthetics : [],
-    }
+    return json
   } finally {
     clearTimeout(timer)
   }
 }
 
-const EMPTY_DATA = {
-  mainImage: null,
+function getImages(json) {
+  return json.images || json.data.images || {}
+}
+
+const EMPTY_CONTENT = {
   tattooGallery: [],
   aestheticsGallery: [],
   tattooPricing: [],
@@ -65,7 +58,9 @@ const EMPTY_DATA = {
 }
 
 export default function useStudioData() {
-  const [data, setData] = useState(EMPTY_DATA)
+  const [mainImage, setMainImage] = useState(null)
+  const [mainImageLoading, setMainImageLoading] = useState(true)
+  const [content, setContent] = useState(EMPTY_CONTENT)
   const [loading, setLoading] = useState(true)
   const [retrying, setRetrying] = useState(false)
   const [attempt, setAttempt] = useState(0)
@@ -84,25 +79,61 @@ export default function useStudioData() {
 
   useEffect(() => {
     cancelledRef.current = false
+    const isCancelled = () => cancelledRef.current
 
-    async function load() {
+    async function loadMainImage() {
       for (let i = 1; i <= MAX_ATTEMPTS; i += 1) {
-        if (cancelledRef.current) return
+        if (isCancelled()) return
+
+        try {
+          const json = await fetchJson(`${API_URL}?type=main`, REQUEST_TIMEOUT_MS)
+          if (isCancelled()) return
+
+          const images = getImages(json)
+          const mainImages = Array.isArray(images.main) ? images.main : []
+          setMainImage(mainImages[0] || null)
+          setMainImageLoading(false)
+          return
+        } catch (err) {
+          if (isCancelled()) return
+          console.error(`Main image fetch failed (attempt ${i}/${MAX_ATTEMPTS}):`, err)
+          if (i < MAX_ATTEMPTS) {
+            await sleep(backoff(i))
+          } else {
+            setMainImageLoading(false)
+          }
+        }
+      }
+    }
+
+    async function loadContent() {
+      for (let i = 1; i <= MAX_ATTEMPTS; i += 1) {
+        if (isCancelled()) return
 
         setAttempt(i)
         if (i > 1) setRetrying(true)
 
         try {
-          const result = await requestStudioData(REQUEST_TIMEOUT_MS)
-          if (cancelledRef.current) return
+          const json = await fetchJson(API_URL, REQUEST_TIMEOUT_MS)
+          if (isCancelled()) return
 
-          setData(result)
+          const pricing = json.data.pricing || {}
+          const images = getImages(json)
+
+          setContent({
+            tattooGallery: Array.isArray(images.tattooGallery) ? images.tattooGallery : [],
+            aestheticsGallery: Array.isArray(images.aestheticsGallery)
+              ? images.aestheticsGallery
+              : [],
+            tattooPricing: Array.isArray(pricing.tattoo) ? pricing.tattoo : [],
+            aestheticsPricing: Array.isArray(pricing.aesthetics) ? pricing.aesthetics : [],
+          })
           setError(null)
           setLoading(false)
           setRetrying(false)
           return
         } catch (err) {
-          if (cancelledRef.current) return
+          if (isCancelled()) return
 
           const message = err.message || 'Something went wrong while loading content.'
           console.error(`Studio data fetch failed (attempt ${i}/${MAX_ATTEMPTS}):`, err)
@@ -110,8 +141,7 @@ export default function useStudioData() {
           setLoading(false)
 
           if (i < MAX_ATTEMPTS) {
-            const delay = Math.min(2000 * 2 ** (i - 1), 15000)
-            await sleep(delay)
+            await sleep(backoff(i))
           } else {
             setRetrying(false)
           }
@@ -119,7 +149,8 @@ export default function useStudioData() {
       }
     }
 
-    load()
+    loadMainImage()
+    loadContent()
 
     return () => {
       cancelledRef.current = true
@@ -127,7 +158,9 @@ export default function useStudioData() {
   }, [reloadKey])
 
   return {
-    ...data,
+    mainImage,
+    mainImageLoading,
+    ...content,
     loading,
     retrying,
     attempt,

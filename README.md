@@ -51,7 +51,22 @@ The optimised output is generated in the `dist` folder.
 
 ## Dynamic Content (Hero Image, Galleries and Pricing)
 
-The hero image, galleries and pricing are fetched at runtime from a Google Apps Script web app. The endpoint is configured in `src/constants.js` (`API_URL`) and must return JSON in this shape:
+Content is fetched at runtime from a Google Apps Script web app, configured in `src/constants.js` (`API_URL`). The app makes two requests in parallel so the hero image can appear as quickly as possible:
+
+1. A fast call to `API_URL?type=main` returns only the hero image, so it renders without waiting for the rest:
+
+```json
+{
+  "success": true,
+  "data": {
+    "images": {
+      "main": [{ "id": "1", "name": "Studio", "url": "https://..." }]
+    }
+  }
+}
+```
+
+2. A background call to `API_URL` (no parameter) returns the pricing and the two galleries:
 
 ```json
 {
@@ -62,7 +77,6 @@ The hero image, galleries and pricing are fetched at runtime from a Google Apps 
       "aesthetics": [{ "heading": "BODY PIERCING", "subheading": "14+", "item": "Navel", "price": "30" }]
     },
     "images": {
-      "main": [{ "id": "1", "name": "Studio", "url": "https://..." }],
       "tattooGallery": [{ "id": "2", "name": "Sleeve", "url": "https://..." }],
       "aestheticsGallery": [{ "id": "3", "name": "Facial", "url": "https://..." }]
     }
