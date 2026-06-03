@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://benbrady96.github.io/bruso-elite-studio-webpage/sitemap.xml
+Sitemap: https://brusoelitestudio.com/sitemap.xml

@@ -2,7 +2,7 @@
 
 The official single-page website for Bruso Elite Studio, a premium tattoo and aesthetics studio in King's Lynn. The site showcases the studio's work, pricing, client reviews, and location, and makes it easy for visitors to book either the tattoo or aesthetics side straight through WhatsApp.
 
-Live site: https://benbrady96.github.io/bruso-elite-studio-webpage/
+Live site: https://brusoelitestudio.com/
 
 ## Overview
 
@@ -99,7 +99,7 @@ Important: the Apps Script deployment must be set to "Who has access: Anyone". I
 
 The site is deployed to GitHub Pages automatically by a GitHub Actions workflow ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)). Every push to the `main` branch builds the project and publishes the `dist` folder.
 
-For Pages to serve the assets correctly the Vite `base` is set to the repository name in `vite.config.js`. If you fork or rename the repository, update that value to match.
+The site is served from the custom domain `brusoelitestudio.com`, so the Vite `base` is `/` in `vite.config.js`. The custom domain is held by the `public/CNAME` file (copied into `dist/` on every build) and by the repository's Pages settings. If you ever serve the site from a GitHub Pages subpath again, set `base` back to `/<repo-name>/` and remove the CNAME.
 
 The first deployment also needs Pages enabled once in the repository: go to Settings, then Pages, and set the source to GitHub Actions.
 

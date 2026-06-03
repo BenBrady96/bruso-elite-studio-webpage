@@ -23,6 +23,9 @@ pnpm-debug.log*
 .env.*
 !.env.example
 
+# Internal docs / notes (not part of the deployed site)
+DOMAIN-SETUP.md
+
 # Editor and OS files
 .vscode/*
 !.vscode/extensions.json
