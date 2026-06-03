@@ -21,6 +21,7 @@ export default function App() {
     aestheticsGallery,
     tattooPricing,
     aestheticsPricing,
+    text,
     loading,
     retrying,
     attempt,
@@ -60,33 +61,33 @@ export default function App() {
       <Header />
       <main>
         <Hero image={mainImage} onImageSettled={() => setHeroImageSettled(true)} />
-        <About />
+        <About text={text.about} />
         <ServiceArea
           id="tattoo"
           title="Tattoo"
-          intro="Custom artwork, cover ups and fine detail work. Browse a selection of recent pieces and view our session pricing below."
+          intro={text.tattooIntro}
           images={tattooGallery}
           prices={tattooPricing}
           status={dataStatus}
           altLabel="Tattoo artwork"
-          pricingNote="Get in touch for a bespoke quote on larger custom pieces."
+          pricingNote={text.tattooPricing}
           galleryEmptyMessage="No tattoo images are available at the moment."
         />
         <ServiceArea
           id="aesthetics"
           title="Aesthetics"
-          intro="Skin treatments, boosters, piercings and more, carried out with the same care and precision. Explore our work and the full price list below."
+          intro={text.aestheticsIntro}
           images={aestheticsGallery}
           prices={aestheticsPricing}
           status={dataStatus}
           altLabel="Aesthetics treatment"
-          pricingNote="Get in touch to book a consultation or to ask about a treatment."
+          pricingNote={text.aestheticsPricing}
           galleryEmptyMessage="No aesthetics images are available at the moment."
         />
         <Reviews />
         <Location />
       </main>
-      <Footer />
+      <Footer text={text.thankYou} />
       <WhatsAppButton />
     </div>
   )

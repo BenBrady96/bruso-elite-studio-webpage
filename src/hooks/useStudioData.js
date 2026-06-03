@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { API_URL } from '../constants'
+import { API_URL, TEXT_API_KEYS, TEXT_DEFAULTS } from '../constants'
 
 const MAX_ATTEMPTS = 5
 const REQUEST_TIMEOUT_MS = 12000
@@ -50,11 +50,25 @@ function getImages(json) {
   return json.images || json.data.images || {}
 }
 
+// Maps the API "text" object onto our internal keys, falling back to the
+// default copy for any field that is missing or blank.
+function getText(json) {
+  const apiText = (json.data && json.data.text) || {}
+  const result = {}
+  for (const [key, apiKey] of Object.entries(TEXT_API_KEYS)) {
+    const value = apiText[apiKey]
+    result[key] =
+      typeof value === 'string' && value.trim() ? value.trim() : TEXT_DEFAULTS[key]
+  }
+  return result
+}
+
 const EMPTY_CONTENT = {
   tattooGallery: [],
   aestheticsGallery: [],
   tattooPricing: [],
   aestheticsPricing: [],
+  text: TEXT_DEFAULTS,
 }
 
 export default function useStudioData() {
@@ -127,6 +141,7 @@ export default function useStudioData() {
               : [],
             tattooPricing: Array.isArray(pricing.tattoo) ? pricing.tattoo : [],
             aestheticsPricing: Array.isArray(pricing.aesthetics) ? pricing.aesthetics : [],
+            text: getText(json),
           })
           setError(null)
           setLoading(false)

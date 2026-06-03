@@ -1,9 +1,9 @@
 import { Mail, Phone } from 'lucide-react'
 import SocialLinks from './SocialLinks'
 import ServiceChooser from './ServiceChooser'
-import { ADDRESS_FULL, CONTACTS, STUDIO_NAME } from '../constants'
+import { ADDRESS_FULL, CONTACTS, STUDIO_NAME, TEXT_DEFAULTS } from '../constants'
 
-export default function Footer() {
+export default function Footer({ text = TEXT_DEFAULTS.thankYou }) {
   return (
     <footer className="border-t border-gray-800 bg-black">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 lg:px-16">
@@ -13,8 +13,7 @@ export default function Footer() {
               {STUDIO_NAME}
             </h3>
             <p className="mt-4 text-sm leading-relaxed text-white/70">
-              Thank you for visiting. We look forward to welcoming you to the
-              studio and bringing your vision to life.
+              {text}
             </p>
           </div>
 

@@ -1,7 +1,32 @@
 export const STUDIO_NAME = 'Bruso Elite Studio'
 
 export const API_URL =
-  'https://script.google.com/macros/s/AKfycbxoX2aVmUPg-B2gL9W2E6wFXLW4F9G_9bCulZtw54JoH8dpUIZmOmqlR3zpZ-Cgj4EarA/exec'
+  'https://script.google.com/macros/s/AKfycbzcxio8fD0_sE0gsGCTNfUXynhjbgPx-k7kTWHsaT-_QRd_M3Ds7up_HWUTKvxVqIzB/exec'
+
+// Fallback copy used until the API responds, or if the API omits a text field.
+// API keys (e.g. "ABOUT THE STUDIO") are mapped to these in useStudioData.
+export const TEXT_DEFAULTS = {
+  about:
+    'Welcome to Bruso Elite Studio. We are a premium tattoo and aesthetics studio dedicated to providing exceptional work in a welcoming, spotless, and professional environment. Our resident tattoo artist Viktor specialises in large scale realistic pieces and flawless cover ups, while our resident aesthetics specialist Natasha offers piercings, tattoo removal, skin treatments and much more. Whatever you are looking for, we will ensure your vision is brought to life with precision and care.',
+  tattooIntro:
+    'Custom artwork, cover ups and fine detail work. Browse a selection of recent pieces and view our session pricing below.',
+  tattooPricing: 'Get in touch for a bespoke quote on larger custom pieces.',
+  aestheticsIntro:
+    'Skin treatments, boosters, piercings and more, carried out with the same care and precision. Explore our work and the full price list below.',
+  aestheticsPricing: 'Get in touch to book a consultation or to ask about a treatment.',
+  thankYou:
+    'Thank you for visiting. We look forward to welcoming you to the studio and bringing your vision to life.',
+}
+
+// Maps our internal text keys to the keys returned by the API "text" object.
+export const TEXT_API_KEYS = {
+  about: 'ABOUT THE STUDIO',
+  tattooIntro: 'TATTOO INTRO',
+  tattooPricing: 'TATTOO PRICING',
+  aestheticsIntro: 'AESTHETICS INTRO',
+  aestheticsPricing: 'AESTHETICS PRICING',
+  thankYou: 'THANK YOU MESSAGE',
+}
 
 export const CONTACTS = {
   tattoo: {
