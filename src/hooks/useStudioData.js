@@ -110,7 +110,7 @@ export default function useStudioData() {
           return
         } catch (err) {
           if (isCancelled()) return
-          console.error(`Main image fetch failed (attempt ${i}/${MAX_ATTEMPTS}):`, err)
+          console.error('Main image fetch failed (attempt %s/%s):', i, MAX_ATTEMPTS, err)
           if (i < MAX_ATTEMPTS) {
             await sleep(backoff(i))
           } else {
@@ -151,7 +151,7 @@ export default function useStudioData() {
           if (isCancelled()) return
 
           const message = err.message || 'Something went wrong while loading content.'
-          console.error(`Studio data fetch failed (attempt ${i}/${MAX_ATTEMPTS}):`, err)
+          console.error('Studio data fetch failed (attempt %s/%s):', i, MAX_ATTEMPTS, err)
           setError(message)
           setLoading(false)
 
