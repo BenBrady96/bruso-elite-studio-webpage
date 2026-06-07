@@ -1,7 +1,7 @@
 export const STUDIO_NAME = 'Bruso Elite Studio'
 
 export const API_URL =
-  'https://script.google.com/macros/s/AKfycbzcxio8fD0_sE0gsGCTNfUXynhjbgPx-k7kTWHsaT-_QRd_M3Ds7up_HWUTKvxVqIzB/exec'
+  'https://script.google.com/macros/s/AKfycbzC5kJ32yfOenlJdSMpjviVZCBwxgkOjR2urU6t6ZKruiNzlpXnmYkJYsawyh9Ko6aC/exec'
 
 // Fallback copy used until the API responds, or if the API omits a text field.
 // API keys (e.g. "ABOUT THE STUDIO") are mapped to these in useStudioData.
