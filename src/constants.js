@@ -17,8 +17,6 @@ export const LEGAL_NOTES = {
     'All prices are shown in GBP and include VAT at the standard rate.',
   tattooAge:
     'Tattoos are only available to clients aged 18 and over. Valid photo ID may be required at appointment.',
-  aestheticsDisclaimer:
-    'Aesthetic treatments require a consultation. Results vary between individuals. Product availability and suitability are assessed on a case by case basis.',
   reviewsSource:
     'Reviews are from verified clients and were originally posted on Google and Facebook.',
 }

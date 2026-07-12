@@ -125,7 +125,6 @@ export default function App() {
           id="aesthetics"
           title="Aesthetics"
           intro={text.aestheticsIntro}
-          notice={LEGAL_NOTES.aestheticsDisclaimer}
           images={aestheticsGallery}
           prices={aestheticsPricing}
           status={dataStatus}
