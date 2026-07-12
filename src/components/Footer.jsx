@@ -5,7 +5,6 @@ import {
   ADDRESS_FULL,
   COMPANY,
   CONTACTS,
-  LEGAL_NOTES,
   STUDIO_NAME,
   TEXT_DEFAULTS,
 } from '../constants'
@@ -103,10 +102,23 @@ export default function Footer({ text = TEXT_DEFAULTS.thankYou }) {
                 in {COMPANY.jurisdiction}.
               </p>
               <p className="mt-2">Registered office: {COMPANY.registeredOffice}</p>
-              {COMPANY.vatRegistered && COMPANY.vatNumber ? (
-                <p className="mt-2">VAT number: {COMPANY.vatNumber}</p>
-              ) : (
-                <p className="mt-2">{LEGAL_NOTES.vatPricing}</p>
+              {COMPANY.vatRegistered && (
+                <p className="mt-2">
+                  {COMPANY.vatNumber ? (
+                    <>VAT number: {COMPANY.vatNumber}</>
+                  ) : (
+                    <>
+                      VAT registered.{' '}
+                      <a
+                        href={`mailto:${COMPANY.privacyEmail}?subject=VAT%20registration%20number%20request`}
+                        className="text-white/70 underline underline-offset-4 hover:text-white"
+                      >
+                        Contact us
+                      </a>{' '}
+                      for our VAT registration number.
+                    </>
+                  )}
+                </p>
               )}
             </div>
             <div className="flex flex-wrap items-start gap-x-6 gap-y-2 uppercase tracking-widest">
