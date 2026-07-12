@@ -102,7 +102,7 @@ export default function CookiePolicy() {
           Cookies we do not use
         </h2>
         <p className="mt-3">
-          We do not currently use analytics, advertising, or social media tracking
+          We do not currently use analytics, advertising or social media tracking
           cookies on this website.
         </p>
       </section>

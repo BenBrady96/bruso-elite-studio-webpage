@@ -9,7 +9,7 @@ export const COMPANY = {
   incorporated: '5 April 2018',
   privacyEmail: 'brusoelitestudio@gmail.com',
   vatRegistered: true,
-  vatNumber: null, // e.g. 'GB 123 4567 89' — add when available
+  vatNumber: null, // e.g. 'GB 123 4567 89' - add when available
 }
 
 export const LEGAL_NOTES = {
@@ -18,7 +18,7 @@ export const LEGAL_NOTES = {
   tattooAge:
     'Tattoos are only available to clients aged 18 and over. Valid photo ID may be required at appointment.',
   aestheticsDisclaimer:
-    'Aesthetic treatments require a consultation. Results vary between individuals. Product availability and suitability are assessed on a case-by-case basis.',
+    'Aesthetic treatments require a consultation. Results vary between individuals. Product availability and suitability are assessed on a case by case basis.',
   reviewsSource:
     'Reviews are from verified clients and were originally posted on Google and Facebook.',
 }
