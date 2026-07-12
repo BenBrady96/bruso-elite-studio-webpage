@@ -43,8 +43,9 @@ export default function CookieConsent() {
           </h2>
           <p id="cookie-consent-description" className="mt-2 text-sm leading-relaxed text-white/75">
             We use a strictly necessary cookie to remember your choice. If you
-            accept, we will also load Google Maps on our location page, which may
-            set additional cookies. See our{' '}
+            accept, we will also load Google Maps on our location page and
+            Cloudflare Web Analytics to help us understand how the site is used.
+            See our{' '}
             <a
               href="#cookies"
               className="text-white underline underline-offset-4 hover:opacity-70"

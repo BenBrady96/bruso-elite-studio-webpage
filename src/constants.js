@@ -12,6 +12,8 @@ export const COMPANY = {
   vatNumber: null, // e.g. 'GB 123 4567 89' - add when available
 }
 
+export const CLOUDFLARE_ANALYTICS_TOKEN = 'af8829c8eb4642419c10e60cc7e2fed8'
+
 export const LEGAL_NOTES = {
   vatPricing:
     'All prices are shown in GBP and include VAT at the standard rate.',

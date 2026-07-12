@@ -74,6 +74,7 @@ export default function PrivacyPolicy() {
           <li>Respond to enquiries and manage bookings</li>
           <li>Display gallery images, pricing and studio information on our website</li>
           <li>Operate and maintain our website securely</li>
+          <li>Understand how visitors use our website (if you accept analytics)</li>
           <li>Meet legal and regulatory obligations</li>
           <li>Remember your cookie preferences</li>
         </ul>
@@ -129,6 +130,20 @@ export default function PrivacyPolicy() {
               className="text-white underline underline-offset-4 hover:opacity-70"
             >
               policies.google.com/privacy
+            </a>
+            .
+          </li>
+          <li>
+            <strong className="text-white">Cloudflare</strong>: if you accept
+            cookies, we use Cloudflare Web Analytics to measure website performance
+            and page views. Cloudflare&apos;s privacy policy is available at{' '}
+            <a
+              href="https://www.cloudflare.com/privacypolicy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white underline underline-offset-4 hover:opacity-70"
+            >
+              cloudflare.com/privacypolicy
             </a>
             .
           </li>

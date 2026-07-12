@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
 import Loader from './components/Loader'
 import CookieConsent from './components/CookieConsent'
+import CloudflareAnalytics from './components/CloudflareAnalytics'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import CookiePolicy from './components/CookiePolicy'
 import { LEGAL_NOTES } from './constants'
@@ -80,6 +81,7 @@ export default function App() {
     return (
       <>
         <PrivacyPolicy />
+        <CloudflareAnalytics />
         <CookieConsent />
       </>
     )
@@ -89,6 +91,7 @@ export default function App() {
     return (
       <>
         <CookiePolicy />
+        <CloudflareAnalytics />
         <CookieConsent />
       </>
     )
@@ -137,6 +140,7 @@ export default function App() {
       </main>
       <Footer text={text.thankYou} />
       <WhatsAppButton />
+      <CloudflareAnalytics />
       <CookieConsent />
     </div>
   )

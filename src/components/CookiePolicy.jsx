@@ -74,7 +74,7 @@ export default function CookiePolicy() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr className="border-b border-gray-800/60">
                   <td className="py-3 pr-4 align-top">Google Maps</td>
                   <td className="py-3 pr-4 align-top">
                     Displays an interactive map on our location page. Google may set
@@ -94,16 +94,55 @@ export default function CookiePolicy() {
               </tbody>
             </table>
           </div>
+
+          <div className="border border-gray-800 p-5">
+            <h3 className="font-bold uppercase tracking-widest text-white">
+              Analytics (requires consent)
+            </h3>
+            <p className="mt-2">
+              These help us understand how visitors use our website. They are only
+              activated if you click &ldquo;Accept&rdquo; on our cookie banner.
+            </p>
+            <table className="mt-4 w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-gray-800 text-white/60">
+                  <th className="pb-2 pr-4 font-medium">Provider</th>
+                  <th className="pb-2 pr-4 font-medium">Purpose</th>
+                  <th className="pb-2 font-medium">Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="py-3 pr-4 align-top">Cloudflare Web Analytics</td>
+                  <td className="py-3 pr-4 align-top">
+                    Measures website performance and page views. Cloudflare Web
+                    Analytics does not use cookies on your device, but it does
+                    collect usage data when enabled. See{' '}
+                    <a
+                      href="https://www.cloudflare.com/privacypolicy/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white underline underline-offset-4 hover:opacity-70"
+                    >
+                      Cloudflare&apos;s privacy policy
+                    </a>
+                    .
+                  </td>
+                  <td className="py-3 align-top">Session / page view only</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
       <section>
         <h2 className="text-lg font-bold uppercase tracking-widest text-white">
-          Cookies we do not use
+          Tracking we do not use
         </h2>
         <p className="mt-3">
-          We do not currently use analytics, advertising or social media tracking
-          cookies on this website.
+          We do not use advertising or social media tracking cookies on this
+          website.
         </p>
       </section>
 
