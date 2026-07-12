@@ -1,5 +1,6 @@
 import { Star } from 'lucide-react'
 import { REVIEWS } from '../data/reviews'
+import { LEGAL_NOTES } from '../constants'
 
 function Stars({ rating }) {
   return (
@@ -20,6 +21,9 @@ export default function Reviews() {
           <div className="mx-auto mt-6 h-px w-16 bg-white" aria-hidden="true" />
           <p className="mx-auto mt-6 max-w-2xl text-white/70">
             What our clients say about their experience at the studio.
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-xs text-white/50">
+            {LEGAL_NOTES.reviewsSource}
           </p>
         </div>
 

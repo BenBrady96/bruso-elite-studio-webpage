@@ -1,5 +1,28 @@
 export const STUDIO_NAME = 'Bruso Elite Studio'
 
+export const COMPANY = {
+  legalName: 'BRUSO ELITE STUDIO LTD',
+  tradingName: 'Bruso Elite Studio',
+  number: '11292400',
+  registeredOffice: "73 Lynn Road, Gaywood, King's Lynn, England, PE30 4PR",
+  jurisdiction: 'England and Wales',
+  incorporated: '5 April 2018',
+  privacyEmail: 'brusoelitestudio@gmail.com',
+  vatRegistered: false,
+  vatNumber: null,
+}
+
+export const LEGAL_NOTES = {
+  vatPricing:
+    'All prices are shown in GBP and are the total amount payable. We are not VAT registered.',
+  tattooAge:
+    'Tattoos are only available to clients aged 18 and over. Valid photo ID may be required at appointment.',
+  aestheticsDisclaimer:
+    'Aesthetic treatments require a consultation. Results vary between individuals. Product availability and suitability are assessed on a case-by-case basis.',
+  reviewsSource:
+    'Reviews are from verified clients and were originally posted on Google and Facebook.',
+}
+
 export const API_URL =
   'https://script.google.com/macros/s/AKfycbzC5kJ32yfOenlJdSMpjviVZCBwxgkOjR2urU6t6ZKruiNzlpXnmYkJYsawyh9Ko6aC/exec'
 
@@ -52,6 +75,9 @@ export const CONTACTS = {
 
 export const ADDRESS = "73 Lynn Rd, King's Lynn PE30 4PR"
 export const ADDRESS_FULL = "Bruso Elite Studio, 73 Lynn Rd, King's Lynn PE30 4PR"
+
+export const MAPS_URL =
+  'https://www.google.com/maps/search/?api=1&query=73+Lynn+Rd,+King%27s+Lynn+PE30+4PR'
 
 export const NAV_LINKS = [
   { label: 'About', href: '#about' },

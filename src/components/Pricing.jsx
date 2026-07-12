@@ -1,4 +1,5 @@
 import DataStatus from './DataStatus'
+import { LEGAL_NOTES } from '../constants'
 
 function formatPrice(value) {
   if (value === null || value === undefined) return ''
@@ -51,6 +52,7 @@ export default function Pricing({
   status = {},
   title = 'Pricing',
   note,
+  vatNote = LEGAL_NOTES.vatPricing,
   emptyMessage = 'Pricing details are being updated. Please contact us for a quote.',
 }) {
   const hasPrices = Array.isArray(prices) && prices.length > 0
@@ -62,6 +64,9 @@ export default function Pricing({
         <h3 className="sub-heading">{title}</h3>
         {note && (
           <p className="mx-auto mt-4 max-w-2xl text-sm text-white/60">{note}</p>
+        )}
+        {vatNote && (
+          <p className="mx-auto mt-3 max-w-2xl text-xs text-white/50">{vatNote}</p>
         )}
       </div>
 

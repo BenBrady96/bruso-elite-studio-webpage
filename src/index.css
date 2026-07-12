@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,6 +14,11 @@
 
   ::selection {
     @apply bg-white text-black;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-white;
   }
 }
 
@@ -84,6 +87,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .fire-text {
     animation: none;
     filter: drop-shadow(0 0 6px rgba(200, 70, 0, 0.6));

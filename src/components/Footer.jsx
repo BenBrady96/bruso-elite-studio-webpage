@@ -1,7 +1,14 @@
 import { Mail, Phone } from 'lucide-react'
 import SocialLinks from './SocialLinks'
 import ServiceChooser from './ServiceChooser'
-import { ADDRESS_FULL, CONTACTS, STUDIO_NAME, TEXT_DEFAULTS } from '../constants'
+import {
+  ADDRESS_FULL,
+  COMPANY,
+  CONTACTS,
+  LEGAL_NOTES,
+  STUDIO_NAME,
+  TEXT_DEFAULTS,
+} from '../constants'
 
 export default function Footer({ text = TEXT_DEFAULTS.thankYou }) {
   return (
@@ -88,8 +95,39 @@ export default function Footer({ text = TEXT_DEFAULTS.thankYou }) {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-gray-800 pt-6 text-center text-xs uppercase tracking-widest text-white/50">
-          &copy; {new Date().getFullYear()} {STUDIO_NAME}. All rights reserved.
+        <div className="mt-12 border-t border-gray-800 pt-8">
+          <div className="grid grid-cols-1 gap-6 text-xs leading-relaxed text-white/50 md:grid-cols-2">
+            <div>
+              <p>
+                {COMPANY.legalName} (company number {COMPANY.number}), registered
+                in {COMPANY.jurisdiction}.
+              </p>
+              <p className="mt-2">Registered office: {COMPANY.registeredOffice}</p>
+              {COMPANY.vatRegistered && COMPANY.vatNumber ? (
+                <p className="mt-2">VAT number: {COMPANY.vatNumber}</p>
+              ) : (
+                <p className="mt-2">{LEGAL_NOTES.vatPricing}</p>
+              )}
+            </div>
+            <div className="flex flex-wrap items-start gap-x-6 gap-y-2 uppercase tracking-widest">
+              <a
+                href="#privacy"
+                className="transition-opacity hover:text-white/80"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#cookies"
+                className="transition-opacity hover:text-white/80"
+              >
+                Cookie Policy
+              </a>
+            </div>
+          </div>
+
+          <p className="mt-6 text-center text-xs uppercase tracking-widest text-white/50">
+            &copy; {new Date().getFullYear()} {STUDIO_NAME}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

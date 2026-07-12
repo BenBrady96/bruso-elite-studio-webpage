@@ -5,6 +5,7 @@ export default function ServiceArea({
   id,
   title,
   intro,
+  notice,
   images = [],
   prices = [],
   status = {},
@@ -22,6 +23,11 @@ export default function ServiceArea({
           <div className="mx-auto mt-6 h-px w-16 bg-white" aria-hidden="true" />
           {intro && (
             <p className="mx-auto mt-6 max-w-2xl text-white/70">{intro}</p>
+          )}
+          {notice && (
+            <p className="mx-auto mt-4 max-w-2xl border border-white/20 bg-white/5 px-4 py-3 text-xs leading-relaxed text-white/60 sm:text-sm">
+              {notice}
+            </p>
           )}
         </div>
 

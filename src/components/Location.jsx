@@ -1,5 +1,6 @@
 import { MapPin, Clock } from 'lucide-react'
-import { ADDRESS_FULL, MAPS_EMBED_URL, OPENING_HOURS } from '../constants'
+import { ADDRESS_FULL, OPENING_HOURS } from '../constants'
+import MapEmbed from './MapEmbed'
 
 export default function Location() {
   return (
@@ -12,15 +13,7 @@ export default function Location() {
 
         <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="border border-white">
-            <iframe
-              title="Map showing the location of Bruso Elite Studio"
-              src={MAPS_EMBED_URL}
-              className="block h-full min-h-[320px] w-full"
-              style={{ border: 0 }}
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            <MapEmbed />
           </div>
 
           <div className="flex flex-col gap-8">
