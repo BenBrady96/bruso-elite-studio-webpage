@@ -1,5 +1,4 @@
 import DataStatus from './DataStatus'
-import { LEGAL_NOTES } from '../constants'
 
 function formatPrice(value) {
   if (value === null || value === undefined) return ''

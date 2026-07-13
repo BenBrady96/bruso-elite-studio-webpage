@@ -15,8 +15,6 @@ export const COMPANY = {
 export const CLOUDFLARE_ANALYTICS_TOKEN = 'af8829c8eb4642419c10e60cc7e2fed8'
 
 export const LEGAL_NOTES = {
-  vatPricing:
-    'All prices are shown in GBP and are the total amount payable. We are not VAT registered.',
   tattooAge:
     'Tattoos are only available to clients aged 18 and over. Valid photo ID may be required at appointment.',
   reviewsSource:
