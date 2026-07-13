@@ -102,24 +102,11 @@ export default function Footer({ text = TEXT_DEFAULTS.thankYou }) {
                 in {COMPANY.jurisdiction}.
               </p>
               <p className="mt-2">Registered office: {COMPANY.registeredOffice}</p>
-              {COMPANY.vatRegistered && (
-                <p className="mt-2">
-                  {COMPANY.vatNumber ? (
-                    <>VAT number: {COMPANY.vatNumber}</>
-                  ) : (
-                    <>
-                      VAT registered.{' '}
-                      <a
-                        href={`mailto:${COMPANY.privacyEmail}?subject=VAT%20registration%20number%20request`}
-                        className="text-white/70 underline underline-offset-4 hover:text-white"
-                      >
-                        Contact us
-                      </a>{' '}
-                      for our VAT registration number.
-                    </>
-                  )}
-                </p>
-              )}
+              <p className="mt-2">
+                {COMPANY.vatRegistered && COMPANY.vatNumber
+                  ? `VAT number: ${COMPANY.vatNumber}`
+                  : 'We are not VAT registered.'}
+              </p>
             </div>
             <div className="flex flex-wrap items-start gap-x-6 gap-y-2 uppercase tracking-widest">
               <a

@@ -8,15 +8,15 @@ export const COMPANY = {
   jurisdiction: 'England and Wales',
   incorporated: '5 April 2018',
   privacyEmail: 'brusoelitestudio@gmail.com',
-  vatRegistered: true,
-  vatNumber: null, // e.g. 'GB 123 4567 89' - add when available
+  vatRegistered: false,
+  vatNumber: null, // e.g. 'GB 123 4567 89' - add if the business becomes VAT registered
 }
 
 export const CLOUDFLARE_ANALYTICS_TOKEN = 'af8829c8eb4642419c10e60cc7e2fed8'
 
 export const LEGAL_NOTES = {
   vatPricing:
-    'All prices are shown in GBP and include VAT at the standard rate.',
+    'All prices are shown in GBP and are the total amount payable. We are not VAT registered.',
   tattooAge:
     'Tattoos are only available to clients aged 18 and over. Valid photo ID may be required at appointment.',
   reviewsSource:
