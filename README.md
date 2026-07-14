@@ -95,6 +95,30 @@ Important: the Apps Script deployment must be set to "Who has access: Anyone". I
 - The hero background comes from `images.main` in the live data; update it from the Apps Script source rather than in the code.
 - Client reviews are defined in `src/data/reviews.js`.
 
+## Security headers
+
+The response headers that [securityheaders.com](https://securityheaders.com) checks are defined in [`security-headers.mjs`](security-headers.mjs) and emitted as [`public/_headers`](public/_headers) on every build:
+
+| Header | Purpose |
+| --- | --- |
+| `Strict-Transport-Security` | Force HTTPS (`max-age=31536000; includeSubDomains`) |
+| `Content-Security-Policy` | Whitelist scripts, images, frames, and API calls |
+| `X-Frame-Options` | `SAMEORIGIN` — block clickjacking |
+| `X-Content-Type-Options` | `nosniff` |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` |
+| `Permissions-Policy` | Disable unused browser features / APIs |
+
+Vite applies the same headers in `npm run dev` and `npm run preview`.
+
+**Important:** GitHub Pages cannot set custom HTTP response headers. The `_headers` file is honoured automatically if you host on **Cloudflare Pages** or **Netlify**. To keep GitHub Pages and still pass securityheaders.com, put **Cloudflare** (free) in front of the site:
+
+1. Add the domain to Cloudflare and point the GoDaddy nameservers at Cloudflare.
+2. DNS: keep the GitHub Pages records, but set the proxy status to **Proxied** (orange cloud).
+3. In Cloudflare go to **Rules → Transform Rules → Modify Response Header**, create a rule for all requests, and **Set static** each header to the values in `public/_headers` (or `security-headers.mjs`).
+4. Optional: under **SSL/TLS → Edge Certificates**, enable **Always Use HTTPS** (HSTS can live in the Transform Rule as above).
+
+After DNS has propagated, re-scan https://brusoelitestudio.com/ on securityheaders.com.
+
 ## Deployment
 
 The site is deployed to GitHub Pages automatically by a GitHub Actions workflow ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)). Every push to the `main` branch builds the project and publishes the `dist` folder.

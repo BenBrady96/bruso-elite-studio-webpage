@@ -12,8 +12,7 @@ export default function MapEmbed() {
       <iframe
         title="Map showing the location of Bruso Elite Studio"
         src={MAPS_EMBED_URL}
-        className="block h-full min-h-[320px] w-full"
-        style={{ border: 0 }}
+        className="block h-full min-h-[320px] w-full border-0"
         loading="lazy"
         allowFullScreen
         referrerPolicy="no-referrer-when-downgrade"
